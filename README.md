@@ -34,6 +34,14 @@ module.exports = {
 
 ```
 
+## Options
+
+```javascript
+additionalHashContent: function(chunk) { return 'your additional content to hash'; } # a callback to add more content to the resulting hash
+algorithm: 'md5' # which algorithm to use (https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm)
+digest:    'hex' # which digest to use (https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding)
+```
+
 ## License
 
 WebpackChunkHash plugin is released under the [MIT](License) license.

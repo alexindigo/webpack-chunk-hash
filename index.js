@@ -8,6 +8,7 @@ function WebpackChunkHash(options)
 
   this.algorithm = options.algorithm || 'md5';
   this.digest = options.digest || 'hex';
+  this.additionalHashContent = options.additionalHashContent || function() { return ''; };
 }
 
 WebpackChunkHash.prototype.apply = function(compiler)
@@ -19,7 +20,7 @@ WebpackChunkHash.prototype.apply = function(compiler)
     compilation.plugin('chunk-hash', function(chunk, chunkHash)
     {
       var source = chunk.modules.map(getModuleSource).sort(sortById).reduce(concatenateSource, '')
-        , hash   = crypto.createHash(_plugin.algorithm).update(source)
+        , hash   = crypto.createHash(_plugin.algorithm).update(source + _plugin.additionalHashContent(chunk))
         ;
 
       chunkHash.digest = function(digest)
