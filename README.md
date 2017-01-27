@@ -36,10 +36,13 @@ module.exports = {
 
 ## Options
 
-```javascript
-additionalHashContent: function(chunk) { return 'your additional content to hash'; } # a callback to add more content to the resulting hash
-algorithm: 'md5' # which algorithm to use (https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm)
-digest:    'hex' # which digest to use (https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding)
+```
+// a callback to add more content to the resulting hash
+additionalHashContent: function(chunk) { return 'your additional content to hash'; } 
+// which algorithm to use (https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm)
+algorithm: 'md5'
+// which digest to use (https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding)
+digest:    'hex'
 ```
 
 ## License
