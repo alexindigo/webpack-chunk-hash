@@ -35,7 +35,8 @@ WebpackChunkHash.prototype.apply = function(compiler)
 
 function sortById(a, b)
 {
-  return a.id - b.id;
+  // Allow for string ids, e.g. from HashedModuleIdsPlugin
+  return a.id < b.id ? -1 : (a.id > b.id ? 1 : 0);
 }
 
 function getModuleSource(module)
