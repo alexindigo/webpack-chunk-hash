@@ -8,7 +8,7 @@ function WebpackChunkHash(options)
 
   this.algorithm = options.algorithm || 'md5';
   this.digest = options.digest || 'hex';
-  this.additionalHashContent = options.additionalHashContent || function() { return ''; };
+  this.additionalHashContent = options.additionalHashContent;
 }
 
 WebpackChunkHash.prototype.apply = function(compiler)
@@ -19,17 +19,23 @@ WebpackChunkHash.prototype.apply = function(compiler)
   {
     compilation.plugin('chunk-hash', function(chunk, chunkHash)
     {
-      var source = chunk.modules.map(getModuleSource).sort(sortById).reduce(concatenateSource, '')
-        , hash   = crypto.createHash(_plugin.algorithm).update(source + _plugin.additionalHashContent(chunk))
-        ;
+      var source = chunk.modules.map(getModuleSource).sort(sortById).reduce(concatenateSource, '');
+
+      if (_plugin.additionalHashContent) {
+        source = source + _plugin.additionalHashContent(chunk);
+      }
 
       chunkHash.digest = function(digest)
       {
-        return hash.digest(digest || _plugin.digest);
+        return _plugin.update(source, _plugin.algorithm).digest(digest || _plugin.digest);
       };
     });
   });
 };
+
+WebpackChunkHash.prototype.update = function(source, algorithm) {
+  return crypto.createHash(algorithm).update(source);
+}
 
 // helpers
 
