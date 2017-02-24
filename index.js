@@ -37,15 +37,13 @@ WebpackChunkHash.prototype.apply = function(compiler)
 };
 
 WebpackChunkHash.prototype.makeDllHash = function() {
-  var source;
+  var source = '';
   if (typeof this.dllManifestPath === 'string') {
     try {
       source = JSON.stringify(require(this.dllManifestPath));
-    } catch (e) {
-      source = '';
-    }
-    return source;
+    } catch (e) {}
   }
+  return source;
 }
 
 WebpackChunkHash.prototype.update = function(source) {
