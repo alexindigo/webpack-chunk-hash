@@ -24,7 +24,6 @@
   ],
   "author": "Alex Indigo <iam@alexindigo.com>",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "argparse": "^1.0.4",
     "jasmine-node": "^1.14.5",
