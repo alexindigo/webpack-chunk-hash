@@ -27,15 +27,11 @@ WebpackChunkHash.prototype.apply = function(compiler)
 
       chunkHash.digest = function(digest)
       {
-        return _plugin.update(source, _plugin.algorithm).digest(digest || _plugin.digest);
+        return updateSource(source, _plugin.algorithm).digest(digest || _plugin.digest);
       };
     });
   });
 };
-
-WebpackChunkHash.prototype.update = function(source, algorithm) {
-  return crypto.createHash(algorithm).update(source);
-}
 
 // helpers
 
@@ -56,4 +52,8 @@ function getModuleSource(module)
 function concatenateSource(result, module)
 {
   return result + '#' + module.id + ':' + module.source + '$' + (module.dependencies.join(','));
+}
+
+function updateSource(source, algorithm) {
+  return crypto.createHash(algorithm).update(source);
 }
