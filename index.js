@@ -41,7 +41,9 @@ WebpackChunkHash.prototype.makeDllHash = function() {
   if (typeof this.dllManifestPath === 'string') {
     try {
       source = JSON.stringify(require(this.dllManifestPath));
-    } catch (e) {}
+    } catch (e) {
+      return '';
+    }
   }
   return source;
 }
