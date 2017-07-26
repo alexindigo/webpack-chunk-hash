@@ -28,7 +28,7 @@ module.exports = {
     chunkFilename: '[name].[chunkhash].js',
   },
   plugins: [
-    new WebpackChunkHash({algorithm: 'md5'}) // 'md5' is default value
+    new WebpackChunkHash({ algorithm: 'md5' }) // 'md5' is default value
   ]
 };
 
@@ -36,12 +36,26 @@ module.exports = {
 
 ## Options
 
+### additionalHashContent
+a callback to add more content to the resulting hash
+
 ```
-// a callback to add more content to the resulting hash
-additionalHashContent: function(chunk) { return 'your additional content to hash'; } 
-// which algorithm to use (https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm)
+additionalHashContent: function(chunk) {
+  return 'your additional content to hash';
+}
+```
+
+### algorithm
+which algorithm to use (https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm)
+
+```
 algorithm: 'md5'
-// which digest to use (https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding)
+```
+
+### digest
+which digest to use (https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding)
+
+```
 digest:    'hex'
 ```
 
